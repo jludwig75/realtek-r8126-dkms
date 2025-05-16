@@ -6,7 +6,7 @@ After an update, you should just need to re-enroll the MOK.
 
 ## Generate Signing Key
 
-One time. Probably already done
+One time. Generate signing keys
 
 ```shell
 cd /var/lib/shim-signed/mok
@@ -18,9 +18,9 @@ sudo openssl x509 -outform DER -in MOK.pem -out MOK.der
 
 ## Install Key in BIOS
 
-Not sure if this has to be done after a BIOS update
+Enroll signing key in BIOS. Might need to be done after any BIOS update. I think so, but I'm not sure.
 
-1. Install key
+1. Import the signing key (public key)
 
 ```shell
 sudo mokutil --import MOK.der
@@ -31,7 +31,7 @@ sudo mokutil --import MOK.der
 
 ## Sign the driver
 
-Probably one time. Probably already done/ Probably don't have to do this after an update. Probably just have to re-enroll the key.
+Should only need to be done if the driver was re-built.
 
 ```shell
 sudo /usr/src/linux-headers-$(uname -r)/scripts/sign-file sha256 \
